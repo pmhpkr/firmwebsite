@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>GSTAT Court Fee Calculator | Section 112 Appeal Filing Fee</title>
+<meta name="description" content="Calculate the GSTAT filing fee for a Section 112 appeal — demand orders, penalty-only orders under Section 129, and refund/other orders, per Rule 110(5) of the GSTAT Procedure Rules, 2025.">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta property="og:title" content="GSTAT Court Fee Calculator">
+<meta property="og:description" content="Quickly calculate the GSTAT Section 112 appeal filing fee for demand, penalty-only, and refund/other orders.">
+<meta property="og:type" content="website">
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  background: #faf9f7;
+  padding: 24px 16px;
+  color: #2a2a2a;
+}
+.card {
+  max-width: 480px;
+  margin: 0 auto;
+  background: #ffffff;
+  border: 1px solid #e5e1da;
+  border-radius: 14px;
+  padding: 28px;
+}
+h1 {
+  font-size: 19px;
+  font-weight: 600;
+  margin-bottom: 4px;
+  color: #1a1a1a;
+}
+.sub {
+  font-size: 13px;
+  color: #8a8378;
+  margin-bottom: 22px;
+}
+label {
+  display: block;
+  font-size: 13px;
+  font-weight: 600;
+  color: #4a4438;
+  margin-bottom: 6px;
+}
+.group { margin-bottom: 18px; }
+.pill-row { display: flex; gap: 8px; flex-wrap: wrap; }
+.pill {
+  flex: 1;
+  min-width: 100px;
+  text-align: center;
+  padding: 10px;
+  border: 1px solid #d8d3c8;
+  border-radius: 8px;
+  font-size: 13.5px;
+  font-weight: 500;
+  color: #5a5448;
+  cursor: pointer;
+  background: #fffdfa;
+  user-select: none;
+}
+.pill.active { background: #8a5a2a; border-color: #8a5a2a; color: #ffffff; }
+select {
+  width: 100%;
+  padding: 11px 12px;
+  border: 1px solid #d8d3c8;
+  border-radius: 8px;
+  font-size: 15px;
+  color: #1a1a1a;
+  background: #fffdfa;
+}
+.input-wrap { position: relative; }
+.input-wrap span.prefix {
+  position: absolute;
+  left: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #8a8378;
+  font-size: 15px;
+}
+input[type="text"] {
+  width: 100%;
+  padding: 12px 12px 12px 28px;
+  border: 1px solid #d8d3c8;
+  border-radius: 8px;
+  font-size: 16px;
+  color: #1a1a1a;
+  background: #fffdfa;
+}
+input[type="text"]:focus, select:focus { outline: none; border-color: #b8915f; }
+.result { margin-top: 22px; border-top: 1px solid #ece8e0; padding-top: 18px; }
+.row {
+  display: flex;
+  justify-content: space-between;
+  font-size: 14px;
+  color: #5a5448;
+  margin-bottom: 8px;
+}
+.row .val { font-weight: 500; color: #2a2a2a; }
+.total {
+  margin-top: 10px;
+  padding-top: 12px;
+  border-top: 1px dashed #ddd6c8;
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+}
+.total .label { font-size: 14px; font-weight: 600; color: #2a2a2a; }
+.total .amount { font-size: 26px; font-weight: 700; color: #8a5a2a; }
+.flag {
+  margin-top: 14px;
+  font-size: 12.5px;
+  color: #9a6a2a;
+  background: #fbf2e3;
+  border: 1px solid #f0e0c0;
+  border-radius: 8px;
+  padding: 8px 12px;
+}
+.note { margin-top: 16px; font-size: 12px; color: #a39c8e; line-height: 1.5; }
+.disclaimer {
+  margin-top: 14px;
+  font-size: 11.5px;
+  color: #b0a89a;
+  line-height: 1.5;
+  padding-top: 14px;
+  border-top: 1px solid #ece8e0;
+}
+.page-footer {
+  max-width: 480px;
+  margin: 14px auto 0;
+  text-align: center;
+  font-size: 11px;
+  color: #c2bbac;
+}
+.hidden { display: none; }
+</style>
+</head>
+<body>
+<div class="card">
+  <h1>GSTAT Filing Fee Calculator</h1>
+  <div class="sub">Section 112 appeal &middot; payable via Bharatkosh</div>
+
+  <div class="group">
+    <label>Order type</label>
+    <div class="pill-row">
+      <div class="pill active" id="pill-demand">Demand / Enforcement Order</div>
+      <div class="pill" id="pill-flat">Refund / Other Order</div>
+    </div>
+  </div>
+
+  <div id="flat-orderselect" class="group hidden">
+    <label for="flatType">Order subtype</label>
+    <select id="flatType">
+      <option value="refund">Refund Order</option>
+      <option value="registration">Registration Order</option>
+      <option value="recovery">Recovery Order</option>
+      <option value="enforcement_not129">Enforcement Order (not Section 129)</option>
+      <option value="lut">LUT Order</option>
+      <option value="other">Other Order</option>
+    </select>
+  </div>
+
+  <div id="demand-options" class="group">
+    <label>What is in dispute?</label>
+    <div class="pill-row">
+      <div class="pill active" id="pill-tax">Tax / ITC demand</div>
+      <div class="pill" id="pill-penalty">Penalty only (Sec. 129)</div>
+    </div>
+  </div>
+
+  <div id="amount-group" class="group">
+    <label id="amount-label" for="amount">Disputed tax / ITC amount (Rs)</label>
+    <div class="input-wrap">
+      <span class="prefix">Rs</span>
+      <input type="text" id="amount" placeholder="e.g. 7,45,00,000" inputmode="numeric">
+    </div>
+  </div>
+
+  <div class="result" id="result" style="display:none;">
+    <div id="demand-breakup">
+      <div class="row"><span>Amount considered</span><span class="val" id="r-amount">-</span></div>
+      <div class="row"><span>Lakhs (rounded up)</span><span class="val" id="r-lakhs">-</span></div>
+      <div class="row"><span>Rate</span><span class="val">Rs 1,000 per lakh (or part)</span></div>
+      <div class="row"><span>Calculated fee</span><span class="val" id="r-calc">-</span></div>
+    </div>
+    <div id="flat-breakup" class="hidden">
+      <div class="row"><span>Order subtype</span><span class="val" id="r-subtype">-</span></div>
+      <div class="row"><span>Fee basis</span><span class="val">Flat fee - non-demand order</span></div>
+    </div>
+    <div class="flag" id="r-flag" style="display:none;"></div>
+    <div class="total">
+      <span class="label">Filing fee payable</span>
+      <span class="amount" id="r-total">-</span>
+    </div>
+  </div>
+
+  <div class="note">
+    Per Rule 110(5) of the GSTAT Procedure Rules, 2025: demand orders and Enforcement Orders under Section 129 attract Rs 1,000 per Rs 1 lakh (or part) of the tax, ITC, difference, fine, fee or penalty involved, subject to a minimum of Rs 5,000 and a maximum of Rs 25,000. Refund, Registration, Recovery, Enforcement (not under Section 129), LUT, and Other orders attract a flat Rs 5,000. There is an ongoing dispute over whether the GSTAT portal applies the Rs 5,000 minimum correctly - some practitioners report the portal adding it on top of the calculated fee rather than using it as a floor. Worth checking the actual challan generated against this figure before relying on it.
+  </div>
+
+  <div class="disclaimer">
+    This tool is provided for general informational purposes only and does not constitute legal advice. Fee rules can change and individual cases vary. Always verify the applicable fee against the current GSTAT Procedure Rules and the live fee schedule on the official e-filing portal before relying on this for an actual filing.
+  </div>
+</div>
+
+<div class="page-footer">GSTAT Court Fee Calculator</div>
+
+<script>
+(function() {
+  var orderClass = 'demand';
+  var disputeType = 'tax';
+
+  var pillDemand = document.getElementById('pill-demand');
+  var pillFlat = document.getElementById('pill-flat');
+  var pillTax = document.getElementById('pill-tax');
+  var pillPenalty = document.getElementById('pill-penalty');
+  var flatOrderSelect = document.getElementById('flat-orderselect');
+  var demandOptions = document.getElementById('demand-options');
+  var amountGroup = document.getElementById('amount-group');
+  var amountLabel = document.getElementById('amount-label');
+  var amountInput = document.getElementById('amount');
+  var flatTypeSelect = document.getElementById('flatType');
+  var result = document.getElementById('result');
+  var demandBreakup = document.getElementById('demand-breakup');
+  var flatBreakup = document.getElementById('flat-breakup');
+  var flagEl = document.getElementById('r-flag');
+
+  var flatLabels = {
+    refund: 'Refund Order',
+    registration: 'Registration Order',
+    recovery: 'Recovery Order',
+    enforcement_not129: 'Enforcement Order (not Sec. 129)',
+    lut: 'LUT Order',
+    other: 'Other Order'
+  };
+
+  function formatRs(num) {
+    return 'Rs ' + num.toLocaleString('en-IN');
+  }
+
+  function parseAmount(str) {
+    var cleaned = str.replace(/[^0-9.]/g, '');
+    return cleaned ? parseFloat(cleaned) : NaN;
+  }
+
+  function setOrderClass(cls) {
+    orderClass = cls;
+    pillDemand.classList.toggle('active', cls === 'demand');
+    pillFlat.classList.toggle('active', cls === 'flat');
+    flatOrderSelect.classList.toggle('hidden', cls !== 'flat');
+    demandOptions.classList.toggle('hidden', cls !== 'demand');
+    amountGroup.classList.toggle('hidden', cls !== 'demand');
+    compute();
+  }
+
+  function setDisputeType(type) {
+    disputeType = type;
+    pillTax.classList.toggle('active', type === 'tax');
+    pillPenalty.classList.toggle('active', type === 'penalty');
+    amountLabel.textContent = type === 'tax'
+      ? 'Disputed tax / ITC amount (Rs)'
+      : 'Disputed penalty amount (Rs)';
+    compute();
+  }
+
+  function compute() {
+    if (orderClass === 'flat') {
+      var subtype = flatTypeSelect.value;
+      demandBreakup.classList.add('hidden');
+      flatBreakup.classList.remove('hidden');
+      flagEl.style.display = 'none';
+      document.getElementById('r-subtype').textContent = flatLabels[subtype];
+      document.getElementById('r-total').textContent = formatRs(5000);
+      result.style.display = 'block';
+      return;
+    }
+
+    demandBreakup.classList.remove('hidden');
+    flatBreakup.classList.add('hidden');
+
+    var raw = parseAmount(amountInput.value);
+    if (isNaN(raw) || raw <= 0) {
+      result.style.display = 'none';
+      return;
+    }
+
+    var lakhs = Math.ceil(raw / 100000);
+    var calcFee = lakhs * 1000;
+    var finalFee = calcFee;
+    var flagText = '';
+
+    if (calcFee < 5000) {
+      finalFee = 5000;
+      flagText = 'Calculated fee is below the Rs 5,000 minimum - floor applied.';
+    } else if (calcFee > 25000) {
+      finalFee = 25000;
+      flagText = 'Calculated fee exceeds the Rs 25,000 cap - ceiling applied.';
+    }
+
+    document.getElementById('r-amount').textContent = formatRs(raw) +
+      (disputeType === 'penalty' ? ' (penalty)' : ' (tax/ITC)');
+    document.getElementById('r-lakhs').textContent = lakhs.toLocaleString('en-IN');
+    document.getElementById('r-calc').textContent = formatRs(calcFee);
+    document.getElementById('r-total').textContent = formatRs(finalFee);
+
+    if (flagText) {
+      flagEl.textContent = flagText;
+      flagEl.style.display = 'block';
+    } else {
+      flagEl.style.display = 'none';
+    }
+
+    result.style.display = 'block';
+  }
+
+  pillDemand.addEventListener('click', function() { setOrderClass('demand'); });
+  pillFlat.addEventListener('click', function() { setOrderClass('flat'); });
+  pillTax.addEventListener('click', function() { setDisputeType('tax'); });
+  pillPenalty.addEventListener('click', function() { setDisputeType('penalty'); });
+  flatTypeSelect.addEventListener('change', compute);
+  amountInput.addEventListener('input', compute);
+})();
+</script>
+</body>
+</html>
