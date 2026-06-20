@@ -9,78 +9,80 @@
 
 body {
   font-family: 'Garamond', 'Book Antiqua', 'Palatino', serif;
-  color: #2a2a2a;
+  color: #1a1a1a;
   line-height: 1.8;
   background: #ffffff;
   display: flex;
   align-items: center;
   justify-content: center;
   min-height: 100vh;
-  padding: 20px;
+  padding: 30px;
 }
 
 .disclaimer-container {
-  max-width: 700px;
+  max-width: 800px;
   width: 100%;
-  padding: 60px 40px;
+  padding: 80px 50px;
   background: #ffffff;
-  border: 1px solid #000000;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  border: 2px solid #000000;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
 .header {
   text-align: center;
-  margin-bottom: 40px;
+  margin-bottom: 50px;
+  border-bottom: 2px solid #000000;
+  padding-bottom: 30px;
 }
 
 .firm-name {
-  font-size: 18px;
-  font-weight: 600;
+  font-size: 20px;
+  font-weight: 700;
   color: #000000;
-  letter-spacing: 1px;
-  margin-bottom: 10px;
+  letter-spacing: 2px;
+  margin-bottom: 15px;
 }
 
 .page-title {
-  font-size: 32px;
+  font-size: 42px;
   font-weight: 400;
   color: #000000;
-  margin-bottom: 30px;
   font-style: italic;
+  letter-spacing: 1px;
 }
 
 .disclaimer-content {
   font-size: 15px;
   color: #333333;
-  margin-bottom: 40px;
+  margin-bottom: 50px;
   text-align: justify;
-  line-height: 1.9;
+  line-height: 2;
 }
 
 .disclaimer-content p {
-  margin-bottom: 16px;
+  margin-bottom: 20px;
 }
 
 .button-container {
   display: flex;
   justify-content: center;
-  margin-top: 40px;
+  margin-top: 50px;
 }
 
 .btn-proceed {
   background: #000000;
   color: #ffffff;
-  padding: 14px 40px;
+  padding: 16px 48px;
   border: 2px solid #000000;
-  border-radius: 4px;
+  border-radius: 2px;
   font-family: 'Garamond', 'Book Antiqua', serif;
   font-size: 15px;
   font-weight: 600;
   cursor: pointer;
   text-decoration: none;
   display: inline-block;
-  letter-spacing: 0.5px;
-  transition: all 0.3s ease;
+  letter-spacing: 1px;
+  transition: all 0.4s ease;
 }
 
 .btn-proceed:hover {
@@ -89,23 +91,24 @@ body {
   border-color: #000000;
 }
 
-@media (max-width: 600px) {
+@media (max-width: 700px) {
   .disclaimer-container {
-    padding: 40px 25px;
-    border: none;
+    padding: 50px 30px;
+    border: 1px solid #e0e0e0;
     box-shadow: none;
   }
 
   .page-title {
-    font-size: 24px;
+    font-size: 32px;
   }
 
   .disclaimer-content {
     font-size: 14px;
+    text-align: left;
   }
 
   .btn-proceed {
-    padding: 12px 30px;
+    padding: 14px 36px;
     font-size: 14px;
   }
 }
@@ -119,9 +122,9 @@ body {
   </div>
 
   <div class="disclaimer-content">
-    <p>As per the rules of the Bar Council of India, Advocates are prohibited from soliciting work or advertising in any manner. This website is intended solely to provide general information regarding the advocate's professional background, qualifications, and areas of practice. The information contained herein is for informational purposes only and should not be construed as legal advice, legal opinion, or any form of solicitation.</p>
+    <p>As per the rules of the Bar Council of India, advocates are prohibited from soliciting work or advertising in any manner. This website is intended solely to provide general information regarding the advocate's professional background, qualifications, and areas of practice. The information contained herein is for informational purposes only and should not be construed as legal advice, legal opinion, or any form of solicitation.</p>
 
-    <p>Accessing this website, transmitting information through it, or communicating with the advocate does not create an advocate-client relationship. An Advocate-client relationship shall arise only upon the express acceptance of instructions and execution of an appropriate engagement arrangement.</p>
+    <p>Accessing this website, transmitting information through it, or communicating with the advocate does not create an advocate-client relationship. An advocate-client relationship shall arise only upon the express acceptance of instructions and execution of an appropriate engagement arrangement.</p>
 
     <p>While reasonable efforts are made to ensure the accuracy and currency of the information provided, no representation or warranty is made in this regard, and no liability is accepted for any reliance placed on the contents of this website.</p>
   </div>
