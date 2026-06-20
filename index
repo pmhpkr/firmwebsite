@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Hari Prasad M.S. | Legal Practice | Bengaluru</title>
+<meta name="description" content="Hari Prasad M.S. - Advocate based in Bengaluru specializing in indirect tax, commercial litigation, arbitration, and corporate advisory.">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<nav class="navbar">
+  <div class="container">
+    <div class="logo">Hari Prasad M.S.</div>
+    <ul class="nav-links">
+      <li><a href="index.html" class="active">Home</a></li>
+      <li><a href="practice-areas.html">Practice Areas</a></li>
+      <li><a href="calculator.html">Tools</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+  </div>
+</nav>
+
+<section class="hero">
+  <div class="container">
+    <h1>Legal Advisory & Dispute Resolution</h1>
+    <p>Specialist practice in indirect taxation, commercial litigation, arbitration, and corporate advisory matters.</p>
+    <p style="margin-top: 20px;"><a href="contact.html" class="btn">Get in Touch</a></p>
+  </div>
+</section>
+
+<section class="content">
+  <div class="container">
+    <h2>About This Practice</h2>
+    <p>The practice focuses on advisory, drafting, dispute resolution, and representation across indirect taxation (GST, Customs, Excise), commercial litigation, arbitration, constitutional matters, consumer law, contract advisory, real estate, corporate compliance, and intellectual property.</p>
+    
+    <h2 style="margin-top: 40px;">Key Areas</h2>
+    <div class="grid">
+      <div class="card">
+        <h3>Indirect Tax & GST</h3>
+        <p>Advisory, litigation, and dispute resolution relating to GST, Service Tax, Customs, and allied indirect tax laws.</p>
+      </div>
+      <div class="card">
+        <h3>Commercial Litigation</h3>
+        <p>Representation and advisory in commercial disputes, contractual claims, and proceedings before Commercial Courts.</p>
+      </div>
+      <div class="card">
+        <h3>Arbitration</h3>
+        <p>Drafting, representation, and enforcement of arbitral awards under the Arbitration and Conciliation Act, 1996.</p>
+      </div>
+      <div class="card">
+        <h3>Corporate Advisory</h3>
+        <p>Legal support on regulatory compliance, corporate governance, risk assessment, and business operations.</p>
+      </div>
+    </div>
+
+    <div style="margin-top: 50px; padding: 20px; background: #f5f1e8; border-radius: 8px;">
+      <h3>GSTAT Court Fee Calculator</h3>
+      <p>Quick tool to calculate filing fees for Section 112 appeals to the GST Appellate Tribunal.</p>
+      <p><a href="calculator.html" class="btn" style="display: inline-block; margin-top: 10px;">Access Calculator</a></p>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <p>&copy; 2026 Hari Prasad M.S. | Bengaluru | All rights reserved.</p>
+  </div>
+</footer>
+</body>
+</html>
