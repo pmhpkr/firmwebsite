@@ -1,32 +1,81 @@
+Yes, just copy the full updated `calculator.html` code below and paste it into GitHub to replace the existing file.
+
+Here is the full code — copy everything below and paste it into your `calculator.html` file on GitHub:
+
+---
+
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>GSTAT Court Fee Calculator | Hari Prasad M.S.</title>
+<title>Legal Tools | Hari Prasad M.S.</title>
 <link rel="stylesheet" href="style.css">
 <style>
-.calc-container { max-width: 750px; margin: 60px auto; background: linear-gradient(135deg, #f5f1e8 0%, #fafaf8 100%); border: 1px solid #d4cfc5; border-radius: 1px; padding: 50px; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08); }
-.calc-group { margin-bottom: 25px; }
-.calc-label { display: block; font-size: 13.5px; font-weight: 600; color: #1a2a3a; margin-bottom: 10px; letter-spacing: 0.5px; }
+/* ── Tool Tabs ── */
+.tool-tabs { display: flex; gap: 0; border-bottom: 2px solid #d4cfc5; margin-bottom: 50px; flex-wrap: wrap; }
+.tool-tab { padding: 16px 30px; font-size: 15px; font-family: 'Garamond','Book Antiqua','Palatino',serif; font-weight: 600; letter-spacing: 0.5px; color: #7a8a9a; border: none; border-bottom: 3px solid transparent; background: none; cursor: pointer; transition: all 0.3s ease; margin-bottom: -2px; }
+.tool-tab:hover { color: #b8956a; }
+.tool-tab.active { color: #1a2a3a; border-bottom-color: #b8956a; }
+.tool-panel { display: none; }
+.tool-panel.active { display: block; }
+
+/* ── Shared Calculator Container ── */
+.calc-container { max-width: 780px; margin: 0 auto; background: linear-gradient(135deg, #f5f1e8 0%, #fafaf8 100%); border: 1px solid #d4cfc5; border-radius: 1px; padding: 50px; box-shadow: 0 4px 12px rgba(0,0,0,0.08); }
+.calc-group { margin-bottom: 28px; }
+.calc-label { display: block; font-size: 15px; font-weight: 600; color: #1a2a3a; margin-bottom: 12px; letter-spacing: 0.4px; }
 .pill-row { display: flex; gap: 12px; flex-wrap: wrap; }
-.pill { flex: 1; min-width: 120px; text-align: center; padding: 12px; border: 1px solid #d4cfc5; border-radius: 1px; font-size: 13px; font-weight: 500; color: #7a8a9a; cursor: pointer; background: #ffffff; user-select: none; transition: all 0.4s ease; }
+.pill { flex: 1; min-width: 130px; text-align: center; padding: 14px; border: 1px solid #d4cfc5; border-radius: 1px; font-size: 14.5px; font-weight: 500; color: #7a8a9a; cursor: pointer; background: #ffffff; user-select: none; transition: all 0.4s ease; font-family: 'Garamond','Book Antiqua','Palatino',serif; }
 .pill.active { background: #1a2a3a; border-color: #b8956a; color: #b8956a; }
 .pill:hover { border-color: #b8956a; color: #b8956a; }
-select, input[type="text"] { width: 100%; padding: 12px; border: 1px solid #d4cfc5; border-radius: 1px; font-size: 15px; color: #1a2a3a; background: #ffffff; font-family: 'Garamond', 'Book Antiqua', serif; }
-select:focus, input[type="text"]:focus { outline: none; border-color: #b8956a; box-shadow: 0 0 0 2px rgba(184, 149, 106, 0.1); }
+select, input[type="text"] { width: 100%; padding: 13px; border: 1px solid #d4cfc5; border-radius: 1px; font-size: 16px; color: #1a2a3a; background: #ffffff; font-family: 'Garamond','Book Antiqua',serif; }
+input[type="date"] { width: 100%; padding: 13px; border: 1px solid #d4cfc5; border-radius: 1px; font-size: 16px; color: #1a2a3a; background: #ffffff; font-family: 'Garamond','Book Antiqua',serif; }
+select:focus, input:focus { outline: none; border-color: #b8956a; box-shadow: 0 0 0 2px rgba(184,149,106,0.1); }
 .input-wrap { position: relative; }
-.input-wrap .prefix { position: absolute; left: 12px; top: 50%; transform: translateY(-50%); color: #b8956a; font-size: 15px; }
-input[type="text"] { padding-left: 32px; }
+.input-wrap .prefix { position: absolute; left: 13px; top: 50%; transform: translateY(-50%); color: #b8956a; font-size: 16px; }
+.input-wrap input[type="text"] { padding-left: 34px; }
+
+/* ── Result Blocks ── */
 .calc-result { margin-top: 35px; border-top: 2px solid #d4cfc5; padding-top: 30px; }
-.calc-row { display: flex; justify-content: space-between; font-size: 14px; color: #7a8a9a; margin-bottom: 12px; }
-.calc-row .val { font-weight: 600; color: #1a2a3a; }
+.calc-row { display: flex; justify-content: space-between; font-size: 15.5px; color: #7a8a9a; margin-bottom: 14px; }
+.calc-row .val { font-weight: 600; color: #1a2a3a; text-align: right; max-width: 60%; }
 .calc-total { margin-top: 20px; padding-top: 20px; border-top: 1px dashed #d4cfc5; display: flex; justify-content: space-between; align-items: baseline; }
-.calc-total .label { font-size: 14px; font-weight: 600; color: #1a2a3a; }
-.calc-total .amount { font-size: 28px; font-weight: 400; color: #b8956a; }
-.calc-flag { margin-top: 18px; font-size: 12.5px; color: #7a8a9a; background: #ffffff; border: 1px solid #d4cfc5; border-radius: 1px; padding: 12px; }
-.calc-note { margin-top: 25px; font-size: 13px; color: #7a8a9a; line-height: 1.9; }
+.calc-total .label { font-size: 15.5px; font-weight: 600; color: #1a2a3a; }
+.calc-total .amount { font-size: 30px; font-weight: 400; color: #b8956a; }
+.calc-flag { margin-top: 18px; font-size: 14px; color: #7a8a9a; background: #ffffff; border: 1px solid #d4cfc5; border-radius: 1px; padding: 14px; line-height: 1.8; }
+.calc-flag.warn { border-color: #b8956a; color: #1a2a3a; background: #fdf8f2; }
 .hidden { display: none; }
+
+/* ── Disclaimer Block ── */
+.calc-disclaimer {
+  margin-top: 30px;
+  padding: 20px 22px;
+  background: #ffffff;
+  border: 1px solid #d4cfc5;
+  border-left: 3px solid #b8956a;
+  border-radius: 1px;
+  font-size: 14px;
+  color: #7a8a9a;
+  line-height: 2;
+}
+.calc-disclaimer strong { color: #1a2a3a; }
+
+/* ── Date Result ── */
+.date-result-grid { display: grid; gap: 18px; margin-top: 10px; }
+.date-result-card { background: #ffffff; border: 1px solid #d4cfc5; border-radius: 1px; padding: 22px 26px; }
+.date-result-card .dr-label { font-size: 13px; font-weight: 600; letter-spacing: 0.8px; text-transform: uppercase; color: #7a8a9a; margin-bottom: 10px; }
+.date-result-card .dr-date { font-size: 24px; color: #1a2a3a; font-weight: 400; }
+.date-result-card .dr-sub { font-size: 14px; color: #7a8a9a; margin-top: 6px; line-height: 1.7; }
+.date-result-card.urgent .dr-date { color: #c0392b; }
+.date-result-card.ok .dr-date { color: #27735b; }
+.date-result-card.amnesty { border-color: #b8956a; background: #fdf8f2; }
+.date-result-card.amnesty .dr-date { color: #b8956a; }
+
+@media (max-width: 700px) {
+  .calc-container { padding: 30px 20px; }
+  .tool-tab { padding: 12px 18px; font-size: 14px; }
+}
 </style>
 </head>
 <body>
@@ -45,68 +94,174 @@ input[type="text"] { padding-left: 32px; }
 
 <section class="content">
   <div class="container">
-    <h1>GSTAT Court Fee Calculator</h1>
-    <p style="color: #7a8a9a; margin-bottom: 40px; font-size: 15.5px;">Calculate the filing fee for a Section 112 appeal to the GST Appellate Tribunal, per Rule 110(5) of the GSTAT Procedure Rules, 2025.</p>
+    <h1>Legal Tools</h1>
+    <p style="color:#7a8a9a; margin-bottom:40px; font-size:16.5px;">Reference calculators for GST appellate proceedings. These tools are provided for indicative purposes only and do not constitute legal advice.</p>
 
-    <div class="calc-container">
-      <div class="calc-group">
-        <label class="calc-label">Order type</label>
-        <div class="pill-row">
-          <div class="pill active" id="pill-demand">Demand / Enforcement</div>
-          <div class="pill" id="pill-flat">Refund / Other Order</div>
-        </div>
-      </div>
+    <!-- Tab Navigation -->
+    <div class="tool-tabs">
+      <button class="tool-tab active" data-panel="gstat">GSTAT Court Fee</button>
+      <button class="tool-tab" data-panel="predeposit">Pre-Deposit</button>
+      <button class="tool-tab" data-panel="limitation">Limitation Calculator</button>
+    </div>
 
-      <div id="flat-orderselect" class="calc-group hidden">
-        <label class="calc-label" for="flatType">Order subtype</label>
-        <select id="flatType">
-          <option value="refund">Refund Order</option>
-          <option value="registration">Registration Order</option>
-          <option value="recovery">Recovery Order</option>
-          <option value="enforcement_not129">Enforcement Order (not Section 129)</option>
-          <option value="lut">LUT Order</option>
-          <option value="other">Other Order</option>
-        </select>
-      </div>
+    <!-- PANEL 1: GSTAT Court Fee Calculator -->
+    <div class="tool-panel active" id="panel-gstat">
+      <p style="color:#7a8a9a; margin-bottom:30px; font-size:15.5px;">Calculate the filing fee for a Section 112 appeal to the GST Appellate Tribunal, per Rule 110(5) of the GSTAT Procedure Rules, 2025.</p>
 
-      <div id="demand-options" class="calc-group">
-        <label class="calc-label">What is in dispute?</label>
-        <div class="pill-row">
-          <div class="pill active" id="pill-tax">Tax / ITC demand</div>
-          <div class="pill" id="pill-penalty">Penalty only</div>
+      <div class="calc-container">
+        <div class="calc-group">
+          <label class="calc-label">Order type</label>
+          <div class="pill-row">
+            <div class="pill active" id="g-pill-demand">Demand / Enforcement</div>
+            <div class="pill" id="g-pill-flat">Refund / Other Order</div>
+          </div>
         </div>
-      </div>
 
-      <div id="amount-group" class="calc-group">
-        <label class="calc-label" id="amount-label" for="amount">Disputed amount (Rs)</label>
-        <div class="input-wrap">
-          <span class="prefix">Rs</span>
-          <input type="text" id="amount" placeholder="e.g. 7,45,00,000" inputmode="numeric">
+        <div id="g-flat-orderselect" class="calc-group hidden">
+          <label class="calc-label" for="g-flatType">Order subtype</label>
+          <select id="g-flatType">
+            <option value="refund">Refund Order</option>
+            <option value="registration">Registration Order</option>
+            <option value="recovery">Recovery Order</option>
+            <option value="enforcement_not129">Enforcement Order (not Section 129)</option>
+            <option value="lut">LUT Order</option>
+            <option value="other">Other Order</option>
+          </select>
         </div>
-      </div>
 
-      <div class="calc-result" id="result" style="display:none;">
-        <div id="demand-breakup">
-          <div class="calc-row"><span>Amount</span><span class="val" id="r-amount">—</span></div>
-          <div class="calc-row"><span>Lakhs (rounded)</span><span class="val" id="r-lakhs">—</span></div>
-          <div class="calc-row"><span>Rate</span><span class="val">Rs 1,000 per lakh</span></div>
-          <div class="calc-row"><span>Calculated</span><span class="val" id="r-calc">—</span></div>
+        <div id="g-demand-options" class="calc-group">
+          <label class="calc-label">What is in dispute?</label>
+          <div class="pill-row">
+            <div class="pill active" id="g-pill-tax">Tax / ITC demand</div>
+            <div class="pill" id="g-pill-penalty">Penalty only</div>
+          </div>
         </div>
-        <div id="flat-breakup" class="hidden">
-          <div class="calc-row"><span>Order type</span><span class="val" id="r-subtype">—</span></div>
-          <div class="calc-row"><span>Fee basis</span><span class="val">Flat fee</span></div>
-        </div>
-        <div class="calc-flag" id="r-flag" style="display:none;"></div>
-        <div class="calc-total">
-          <span class="label">Filing Fee</span>
-          <span class="amount" id="r-total">—</span>
-        </div>
-      </div>
 
-      <div class="calc-note">
-        <strong style="color: #1a2a3a;">Important:</strong> This calculator is provided for reference only. The calculated fee is an estimate based on Rule 110(5) of the GSTAT Procedure Rules, 2025. <strong>Do not rely solely on this calculation.</strong> You must independently verify the applicable fee against the live GSTAT fee schedule and official GSTAT portal before filing your appeal. Fee rules and caps are subject to change.
+        <div id="g-amount-group" class="calc-group">
+          <label class="calc-label" id="g-amount-label" for="g-amount">Disputed amount (Rs)</label>
+          <div class="input-wrap">
+            <span class="prefix">Rs</span>
+            <input type="text" id="g-amount" placeholder="e.g. 7,45,00,000" inputmode="numeric">
+          </div>
+        </div>
+
+        <div class="calc-result" id="g-result" style="display:none;">
+          <div id="g-demand-breakup">
+            <div class="calc-row"><span>Amount</span><span class="val" id="g-r-amount">—</span></div>
+            <div class="calc-row"><span>Lakhs (rounded up)</span><span class="val" id="g-r-lakhs">—</span></div>
+            <div class="calc-row"><span>Rate</span><span class="val">Rs 1,000 per lakh</span></div>
+            <div class="calc-row"><span>Calculated</span><span class="val" id="g-r-calc">—</span></div>
+          </div>
+          <div id="g-flat-breakup" class="hidden">
+            <div class="calc-row"><span>Order type</span><span class="val" id="g-r-subtype">—</span></div>
+            <div class="calc-row"><span>Fee basis</span><span class="val">Flat fee</span></div>
+          </div>
+          <div class="calc-flag" id="g-r-flag" style="display:none;"></div>
+          <div class="calc-total">
+            <span class="label">Filing Fee</span>
+            <span class="amount" id="g-r-total">—</span>
+          </div>
+        </div>
+
+        <div class="calc-disclaimer">
+          <strong>Disclaimer:</strong> This calculator is provided for reference only. The fee shown is an estimate based on Rule 110(5) of the GSTAT Procedure Rules, 2025. <strong>Do not rely solely on this calculation.</strong> Verify the applicable fee against the live GSTAT fee schedule and the official GSTAT portal before filing your appeal. Fee rules and caps are subject to amendment without notice.
+        </div>
       </div>
     </div>
+
+    <!-- PANEL 2: Pre-Deposit Calculator -->
+    <div class="tool-panel" id="panel-predeposit">
+      <p style="color:#7a8a9a; margin-bottom:30px; font-size:15.5px;">Calculate the mandatory pre-deposit required to maintain a GST appeal under Section 107 (first appeal to Appellate Authority) or Section 112 (second appeal to GSTAT).</p>
+
+      <div class="calc-container">
+        <div class="calc-group">
+          <label class="calc-label">Appeal stage</label>
+          <div class="pill-row">
+            <div class="pill active" id="pd-pill-107">Section 107 — First Appeal</div>
+            <div class="pill" id="pd-pill-112">Section 112 — GSTAT Appeal</div>
+          </div>
+        </div>
+
+        <div class="calc-group">
+          <label class="calc-label" for="pd-tax">Disputed tax / ITC amount (Rs)</label>
+          <div class="input-wrap">
+            <span class="prefix">Rs</span>
+            <input type="text" id="pd-tax" placeholder="e.g. 50,00,000" inputmode="numeric">
+          </div>
+        </div>
+
+        <div class="calc-group" id="pd-penalty-group">
+          <label class="calc-label" for="pd-penalty">Disputed penalty amount, if any (Rs)</label>
+          <div class="input-wrap">
+            <span class="prefix">Rs</span>
+            <input type="text" id="pd-penalty" placeholder="Leave blank if nil" inputmode="numeric">
+          </div>
+        </div>
+
+        <div class="calc-group" id="pd-112-extra" style="display:none;">
+          <label class="calc-label" for="pd-already-paid">Amount already deposited for first appeal (Rs)</label>
+          <div class="input-wrap">
+            <span class="prefix">Rs</span>
+            <input type="text" id="pd-already-paid" placeholder="10% deposited under Section 107" inputmode="numeric">
+          </div>
+        </div>
+
+        <div class="calc-result" id="pd-result" style="display:none;">
+          <div id="pd-breakup">
+            <div class="calc-row"><span>Disputed tax / ITC</span><span class="val" id="pd-r-tax">—</span></div>
+            <div class="calc-row" id="pd-r-pen-row"><span>Disputed penalty</span><span class="val" id="pd-r-pen">—</span></div>
+            <div class="calc-row"><span>Pre-deposit rate</span><span class="val" id="pd-r-rate">—</span></div>
+            <div class="calc-row"><span>Pre-deposit on tax / ITC</span><span class="val" id="pd-r-dep">—</span></div>
+            <div class="calc-row" id="pd-r-dep-pen-row"><span>Pre-deposit on penalty</span><span class="val" id="pd-r-dep-pen">—</span></div>
+            <div class="calc-row" id="pd-r-already-row" style="display:none;"><span>Already deposited (Sec 107)</span><span class="val" id="pd-r-already">—</span></div>
+          </div>
+          <div class="calc-flag warn" id="pd-r-flag" style="display:none;"></div>
+          <div class="calc-total">
+            <span class="label" id="pd-total-label">Pre-Deposit Required</span>
+            <span class="amount" id="pd-r-total">—</span>
+          </div>
+          <div class="calc-flag" id="pd-r-note2" style="display:none; margin-top:12px;"></div>
+        </div>
+
+        <div class="calc-disclaimer">
+          <strong>Disclaimer:</strong> Under Section 107(6), a pre-deposit of 10% of the remaining disputed tax or ITC (in addition to any admitted tax) is required for maintaining a first appeal. Under Section 112(8), a further 10% of the remaining disputed amount is required for a second appeal before GSTAT — bringing the total pre-deposit across both stages to 20%. These figures are indicative only. <strong>Do not rely solely on this calculation.</strong> Verify the applicable amount against the relevant order and the provisions of the CGST Act before making payment. Caps, conditions, and judicial interpretations may affect the amount payable.
+        </div>
+      </div>
+    </div>
+
+    <!-- PANEL 3: Limitation Calculator -->
+    <div class="tool-panel" id="panel-limitation">
+      <p style="color:#7a8a9a; margin-bottom:30px; font-size:15.5px;">Calculate the last date for filing a GST appeal based on the date of receipt of the order, including the special extended deadline applicable to Section 112 appeals for orders received between 1 July 2017 and 31 March 2026.</p>
+
+      <div class="calc-container">
+        <div class="calc-group">
+          <label class="calc-label">Appeal / Application type</label>
+          <select id="ld-type">
+            <option value="107">Section 107 — First Appeal to Appellate Authority</option>
+            <option value="112">Section 112 — Second Appeal to GSTAT</option>
+            <option value="107cond">Section 107 — With condonation window (max)</option>
+            <option value="112cond">Section 112 — With condonation window (max)</option>
+          </select>
+        </div>
+
+        <div class="calc-group">
+          <label class="calc-label" for="ld-date">Date of receipt of order</label>
+          <input type="date" id="ld-date">
+        </div>
+
+        <div class="calc-result" id="ld-result" style="display:none;">
+          <div class="calc-row"><span>Order received on</span><span class="val" id="ld-r-orderdate">—</span></div>
+          <div class="calc-row"><span>Limitation period</span><span class="val" id="ld-r-period">—</span></div>
+          <div class="calc-row"><span>Today</span><span class="val" id="ld-r-today">—</span></div>
+          <div class="date-result-grid" id="ld-cards" style="margin-top:25px;"></div>
+        </div>
+
+        <div class="calc-disclaimer">
+          <strong>Disclaimer:</strong> The limitation periods shown are based on Sections 107 and 112 of the CGST Act, 2017. Limitation is counted from the date of actual receipt of the order, which may differ from the date of the order itself. For <strong>Section 112 (second appeal)</strong> only — where the order was received between 1 July 2017 and 31 March 2026, the amnesty period is excluded from the limitation count, resulting in an effective last date of <strong>30 June 2026</strong>; this extended deadline does not apply to Section 107 first appeals. This calculator does not account for public holidays, other exclusions under the Limitation Act, 1963, Supreme Court orders on limitation, or any other ground of condonation. <strong>Do not rely solely on this tool.</strong> Always verify against the actual order and applicable law before filing.
+        </div>
+      </div>
+    </div>
+
   </div>
 </section>
 
@@ -117,57 +272,294 @@ input[type="text"] { padding-left: 32px; }
 </footer>
 
 <script>
-(function() {
-  var orderClass = 'demand';
-  var disputeType = 'tax';
-  var pillDemand = document.getElementById('pill-demand');
-  var pillFlat = document.getElementById('pill-flat');
-  var pillTax = document.getElementById('pill-tax');
-  var pillPenalty = document.getElementById('pill-penalty');
-  var flatOrderSelect = document.getElementById('flat-orderselect');
-  var demandOptions = document.getElementById('demand-options');
-  var amountGroup = document.getElementById('amount-group');
-  var amountLabel = document.getElementById('amount-label');
-  var amountInput = document.getElementById('amount');
-  var flatTypeSelect = document.getElementById('flatType');
-  var result = document.getElementById('result');
-  var demandBreakup = document.getElementById('demand-breakup');
-  var flatBreakup = document.getElementById('flat-breakup');
-  var flagEl = document.getElementById('r-flag');
-  var flatLabels = { refund: 'Refund Order', registration: 'Registration Order', recovery: 'Recovery Order', enforcement_not129: 'Enforcement (not 129)', lut: 'LUT Order', other: 'Other Order' };
-  
-  function formatRs(n) { return 'Rs ' + n.toLocaleString('en-IN'); }
-  function parseAmount(s) { var c = s.replace(/[^0-9.]/g, ''); return c ? parseFloat(c) : NaN; }
-  
-  function setOrderClass(c) { orderClass = c; pillDemand.classList.toggle('active', c === 'demand'); pillFlat.classList.toggle('active', c === 'flat'); flatOrderSelect.classList.toggle('hidden', c !== 'flat'); demandOptions.classList.toggle('hidden', c !== 'demand'); amountGroup.classList.toggle('hidden', c !== 'demand'); compute(); }
-  function setDisputeType(t) { disputeType = t; pillTax.classList.toggle('active', t === 'tax'); pillPenalty.classList.toggle('active', t === 'penalty'); amountLabel.textContent = t === 'tax' ? 'Disputed tax / ITC amount (Rs)' : 'Disputed penalty amount (Rs)'; compute(); }
-  
-  function compute() {
-    if (orderClass === 'flat') { var s = flatTypeSelect.value; demandBreakup.classList.add('hidden'); flatBreakup.classList.remove('hidden'); flagEl.style.display = 'none'; document.getElementById('r-subtype').textContent = flatLabels[s]; document.getElementById('r-total').textContent = formatRs(5000); result.style.display = 'block'; return; }
-    demandBreakup.classList.remove('hidden'); flatBreakup.classList.add('hidden');
-    var r = parseAmount(amountInput.value);
-    if (isNaN(r) || r <= 0) { result.style.display = 'none'; return; }
-    var l = Math.ceil(r / 100000);
-    var c = l * 1000;
-    var f = c;
-    var msg = '';
-    if (c < 5000) { f = 5000; msg = 'Fee below Rs 5,000 minimum - floor applied.'; }
-    else if (c > 25000) { f = 25000; msg = 'Fee exceeds Rs 25,000 cap - ceiling applied.'; }
-    document.getElementById('r-amount').textContent = formatRs(r);
-    document.getElementById('r-lakhs').textContent = l.toLocaleString('en-IN');
-    document.getElementById('r-calc').textContent = formatRs(c);
-    document.getElementById('r-total').textContent = formatRs(f);
-    if (msg) { flagEl.textContent = msg; flagEl.style.display = 'block'; } else { flagEl.style.display = 'none'; }
-    result.style.display = 'block';
+(function () {
+
+  /* ─── Tab switching ─── */
+  document.querySelectorAll('.tool-tab').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      document.querySelectorAll('.tool-tab').forEach(function (b) { b.classList.remove('active'); });
+      document.querySelectorAll('.tool-panel').forEach(function (p) { p.classList.remove('active'); });
+      btn.classList.add('active');
+      document.getElementById('panel-' + btn.dataset.panel).classList.add('active');
+    });
+  });
+
+  /* ─── Helpers ─── */
+  function fmtRs(n) { return 'Rs ' + Math.round(n).toLocaleString('en-IN'); }
+  function parseAmt(s) { var c = (s || '').replace(/[^0-9.]/g, ''); return c ? parseFloat(c) : NaN; }
+  function fmtDate(d) {
+    var months = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+    return d.getDate() + ' ' + months[d.getMonth()] + ' ' + d.getFullYear();
   }
-  
-  pillDemand.addEventListener('click', function() { setOrderClass('demand'); });
-  pillFlat.addEventListener('click', function() { setOrderClass('flat'); });
-  pillTax.addEventListener('click', function() { setDisputeType('tax'); });
-  pillPenalty.addEventListener('click', function() { setDisputeType('penalty'); });
-  flatTypeSelect.addEventListener('change', compute);
-  amountInput.addEventListener('input', compute);
+  function addMonths(d, m) { var r = new Date(d); r.setMonth(r.getMonth() + m); return r; }
+  function daysBetween(a, b) { return Math.round((b - a) / 86400000); }
+
+  /* ══════════════════════════════════════════════════════════
+     GSTAT FEE CALCULATOR
+  ══════════════════════════════════════════════════════════ */
+  (function () {
+    var orderClass = 'demand', disputeType = 'tax';
+    var pillDemand = document.getElementById('g-pill-demand');
+    var pillFlat   = document.getElementById('g-pill-flat');
+    var pillTax    = document.getElementById('g-pill-tax');
+    var pillPen    = document.getElementById('g-pill-penalty');
+    var flatSel    = document.getElementById('g-flat-orderselect');
+    var demOpts    = document.getElementById('g-demand-options');
+    var amtGrp     = document.getElementById('g-amount-group');
+    var amtLbl     = document.getElementById('g-amount-label');
+    var amtInp     = document.getElementById('g-amount');
+    var ftSel      = document.getElementById('g-flatType');
+    var result     = document.getElementById('g-result');
+    var demBr      = document.getElementById('g-demand-breakup');
+    var flatBr     = document.getElementById('g-flat-breakup');
+    var flagEl     = document.getElementById('g-r-flag');
+    var flatLabels = { refund:'Refund Order', registration:'Registration Order', recovery:'Recovery Order', enforcement_not129:'Enforcement (not Sec 129)', lut:'LUT Order', other:'Other Order' };
+
+    function setOC(c) {
+      orderClass = c;
+      pillDemand.classList.toggle('active', c === 'demand');
+      pillFlat.classList.toggle('active', c === 'flat');
+      flatSel.classList.toggle('hidden', c !== 'flat');
+      demOpts.classList.toggle('hidden', c !== 'demand');
+      amtGrp.classList.toggle('hidden', c !== 'demand');
+      compute();
+    }
+    function setDT(t) {
+      disputeType = t;
+      pillTax.classList.toggle('active', t === 'tax');
+      pillPen.classList.toggle('active', t === 'penalty');
+      amtLbl.textContent = t === 'tax' ? 'Disputed tax / ITC amount (Rs)' : 'Disputed penalty amount (Rs)';
+      compute();
+    }
+    function compute() {
+      if (orderClass === 'flat') {
+        var s = ftSel.value;
+        demBr.classList.add('hidden'); flatBr.classList.remove('hidden');
+        flagEl.style.display = 'none';
+        document.getElementById('g-r-subtype').textContent = flatLabels[s];
+        document.getElementById('g-r-total').textContent = fmtRs(5000);
+        result.style.display = 'block'; return;
+      }
+      demBr.classList.remove('hidden'); flatBr.classList.add('hidden');
+      var r = parseAmt(amtInp.value);
+      if (isNaN(r) || r <= 0) { result.style.display = 'none'; return; }
+      var l = Math.ceil(r / 100000);
+      var c = l * 1000;
+      var f = c, msg = '';
+      if (c < 5000)  { f = 5000;  msg = 'Fee below Rs 5,000 minimum — floor applied.'; }
+      else if (c > 25000) { f = 25000; msg = 'Fee exceeds Rs 25,000 cap — ceiling applied.'; }
+      document.getElementById('g-r-amount').textContent = fmtRs(r);
+      document.getElementById('g-r-lakhs').textContent  = l.toLocaleString('en-IN');
+      document.getElementById('g-r-calc').textContent   = fmtRs(c);
+      document.getElementById('g-r-total').textContent  = fmtRs(f);
+      if (msg) { flagEl.textContent = msg; flagEl.style.display = 'block'; } else { flagEl.style.display = 'none'; }
+      result.style.display = 'block';
+    }
+    pillDemand.addEventListener('click', function () { setOC('demand'); });
+    pillFlat.addEventListener('click',   function () { setOC('flat'); });
+    pillTax.addEventListener('click',    function () { setDT('tax'); });
+    pillPen.addEventListener('click',    function () { setDT('penalty'); });
+    ftSel.addEventListener('change', compute);
+    amtInp.addEventListener('input',  compute);
+  })();
+
+  /* ══════════════════════════════════════════════════════════
+     PRE-DEPOSIT CALCULATOR
+  ══════════════════════════════════════════════════════════ */
+  (function () {
+    var stage = '107';
+    var pill107   = document.getElementById('pd-pill-107');
+    var pill112   = document.getElementById('pd-pill-112');
+    var taxInp    = document.getElementById('pd-tax');
+    var penInp    = document.getElementById('pd-penalty');
+    var alrInp    = document.getElementById('pd-already-paid');
+    var extra112  = document.getElementById('pd-112-extra');
+    var result    = document.getElementById('pd-result');
+    var flagEl    = document.getElementById('pd-r-flag');
+    var note2     = document.getElementById('pd-r-note2');
+    var alrRow    = document.getElementById('pd-r-already-row');
+    var penRow    = document.getElementById('pd-r-pen-row');
+    var depPenRow = document.getElementById('pd-r-dep-pen-row');
+
+    function setStage(s) {
+      stage = s;
+      pill107.classList.toggle('active', s === '107');
+      pill112.classList.toggle('active', s === '112');
+      extra112.style.display = s === '112' ? 'block' : 'none';
+      alrRow.style.display   = s === '112' ? 'flex'  : 'none';
+      compute();
+    }
+    function compute() {
+      var tax = parseAmt(taxInp.value);
+      var pen = parseAmt(penInp.value) || 0;
+      if (isNaN(tax) || tax <= 0) { result.style.display = 'none'; return; }
+
+      var depTax, depPen, total, note2Msg = '';
+
+      if (stage === '107') {
+        depTax = tax * 0.10;
+        depPen = pen * 0.10;
+        total  = depTax + depPen;
+        document.getElementById('pd-r-rate').textContent = '10% (Sec 107(6))';
+        document.getElementById('pd-total-label').textContent = 'Pre-Deposit Required';
+      } else {
+        depTax = tax * 0.10;
+        depPen = pen * 0.10;
+        var already    = parseAmt(alrInp.value) || 0;
+        var gross      = depTax + depPen;
+        var additional = Math.max(0, gross - already);
+        document.getElementById('pd-r-rate').textContent    = '10% additional (Sec 112(8))';
+        document.getElementById('pd-r-already').textContent = fmtRs(already);
+        document.getElementById('pd-total-label').textContent = 'Additional Pre-Deposit Required (Sec 112)';
+        total = additional;
+        if (already > 0) {
+          note2Msg = 'Total pre-deposit across both stages (10% + 10% = 20% of disputed amount): ' + fmtRs(gross + already) + '. Additional amount now required: ' + fmtRs(additional) + '.';
+        }
+      }
+
+      document.getElementById('pd-r-tax').textContent = fmtRs(tax);
+      document.getElementById('pd-r-pen').textContent = pen > 0 ? fmtRs(pen) : 'Nil';
+      penRow.style.display    = 'flex';
+      depPenRow.style.display = pen > 0 ? 'flex' : 'none';
+      if (pen > 0) document.getElementById('pd-r-dep-pen').textContent = fmtRs(depPen);
+      document.getElementById('pd-r-dep').textContent   = fmtRs(depTax);
+      document.getElementById('pd-r-total').textContent = fmtRs(total);
+
+      flagEl.style.display = 'none';
+      if (note2Msg) { note2.textContent = note2Msg; note2.style.display = 'block'; } else { note2.style.display = 'none'; }
+      result.style.display = 'block';
+    }
+    pill107.addEventListener('click', function () { setStage('107'); });
+    pill112.addEventListener('click', function () { setStage('112'); });
+    taxInp.addEventListener('input', compute);
+    penInp.addEventListener('input', compute);
+    alrInp.addEventListener('input', compute);
+  })();
+
+  /* ══════════════════════════════════════════════════════════
+     LIMITATION CALCULATOR
+  ══════════════════════════════════════════════════════════ */
+  (function () {
+    var typeEl = document.getElementById('ld-type');
+    var dateEl = document.getElementById('ld-date');
+    var result = document.getElementById('ld-result');
+    var cards  = document.getElementById('ld-cards');
+
+    var AMNESTY_FROM = new Date('2017-07-01T00:00:00');
+    var AMNESTY_TO   = new Date('2026-03-31T00:00:00');
+    var AMNESTY_LAST = new Date('2026-06-30T00:00:00');
+
+    var config = {
+      '107':     { months: 3, condMonths: 0, amnesty: false },
+      '112':     { months: 3, condMonths: 0, amnesty: true  },
+      '107cond': { months: 3, condMonths: 1, amnesty: false },
+      '112cond': { months: 3, condMonths: 1, amnesty: true  }
+    };
+
+    function statusCard(lastDate, today, label) {
+      var days   = daysBetween(today, lastDate);
+      var isPast = days < 0;
+      var cls    = isPast ? 'urgent' : (days <= 14 ? 'urgent' : 'ok');
+      var sub    = isPast
+        ? 'Limitation period has expired (' + Math.abs(days) + ' day' + (Math.abs(days) !== 1 ? 's' : '') + ' ago)'
+        : (days === 0 ? 'Last date is today' : days + ' day' + (days !== 1 ? 's' : '') + ' remaining');
+      return '<div class="date-result-card ' + cls + '">'
+           + '<div class="dr-label">' + label + '</div>'
+           + '<div class="dr-date">' + fmtDate(lastDate) + '</div>'
+           + '<div class="dr-sub">' + sub + '</div>'
+           + '</div>';
+    }
+
+    function compute() {
+      var v   = typeEl.value;
+      var raw = dateEl.value;
+      if (!raw) { result.style.display = 'none'; return; }
+
+      var cfg       = config[v];
+      var orderDate = new Date(raw + 'T00:00:00');
+      var today     = new Date(); today.setHours(0,0,0,0);
+
+      var normalLast = addMonths(orderDate, cfg.months);
+      var condLast   = cfg.condMonths ? addMonths(normalLast, cfg.condMonths) : null;
+
+      var amnestyApplies = cfg.amnesty && (orderDate >= AMNESTY_FROM && orderDate <= AMNESTY_TO);
+
+      var periodText = cfg.months + ' months from date of receipt';
+      if (cfg.condMonths) periodText += ' + up to ' + cfg.condMonths + ' month condonation';
+      if (amnestyApplies) periodText += ' (amnesty period excluded)';
+
+      document.getElementById('ld-r-orderdate').textContent = fmtDate(orderDate);
+      document.getElementById('ld-r-period').textContent    = periodText;
+      document.getElementById('ld-r-today').textContent     = fmtDate(today);
+
+      var html = '';
+
+      if (amnestyApplies) {
+        var aDays = daysBetween(today, AMNESTY_LAST);
+        var aPast = aDays < 0;
+        var aCls  = aPast ? 'amnesty urgent' : 'amnesty ok';
+        var aSub  = aPast
+          ? 'Extended window has expired (' + Math.abs(aDays) + ' day' + (Math.abs(aDays) !== 1 ? 's' : '') + ' ago)'
+          : (aDays === 0 ? 'Last date is today' : aDays + ' day' + (aDays !== 1 ? 's' : '') + ' remaining');
+        html += '<div class="date-result-card ' + aCls + '">'
+              + '<div class="dr-label">Last date — amnesty period excluded (Sec 112 appeal)</div>'
+              + '<div class="dr-date">30 June 2026</div>'
+              + '<div class="dr-sub">' + aSub + '</div>'
+              + '</div>';
+
+        var nDays = daysBetween(today, normalLast);
+        var nPast = nDays < 0;
+        html += '<div class="date-result-card">'
+              + '<div class="dr-label">Normal 3-month period (without exclusion — for reference only)</div>'
+              + '<div class="dr-date">' + fmtDate(normalLast) + '</div>'
+              + '<div class="dr-sub">' + (nPast ? 'Expired ' + Math.abs(nDays) + ' day' + (Math.abs(nDays) !== 1 ? 's' : '') + ' ago' : 'In ' + nDays + ' day' + (nDays !== 1 ? 's' : '')) + '</div>'
+              + '</div>';
+
+      } else {
+        html += statusCard(normalLast, today, 'Last date to file appeal');
+
+        if (condLast) {
+          var cDays = daysBetween(today, condLast);
+          var cPast = cDays < 0;
+          var cCls  = cPast ? 'urgent' : '';
+          var cSub  = cPast
+            ? 'Condonation window has also expired'
+            : (cDays === 0 ? 'Last date for condonation is today' : 'Condonation window closes in ' + cDays + ' day' + (cDays !== 1 ? 's' : ''));
+          html += '<div class="date-result-card ' + cCls + '">'
+                + '<div class="dr-label">Last date with condonation (if applicable)</div>'
+                + '<div class="dr-date">' + fmtDate(condLast) + '</div>'
+                + '<div class="dr-sub">' + cSub + '</div>'
+                + '</div>';
+        }
+
+        if (cfg.amnesty && orderDate > AMNESTY_TO) {
+          html += '<div class="date-result-card">'
+                + '<div class="dr-label">Amnesty / special window</div>'
+                + '<div class="dr-date" style="font-size:17px;color:#7a8a9a;">Not applicable</div>'
+                + '<div class="dr-sub">Order received after 31 March 2026 — normal limitation applies.</div>'
+                + '</div>';
+        }
+      }
+
+      cards.innerHTML = html;
+      result.style.display = 'block';
+    }
+
+    typeEl.addEventListener('change', compute);
+    dateEl.addEventListener('change', compute);
+
+    var t  = new Date();
+    var mm = String(t.getMonth() + 1).padStart(2, '0');
+    var dd = String(t.getDate()).padStart(2, '0');
+    dateEl.value = t.getFullYear() + '-' + mm + '-' + dd;
+  })();
+
 })();
 </script>
 </body>
 </html>
+```
+
+---
+
+**To update on GitHub:** go to your repo → click `calculator.html` → click the pencil (Edit) icon → select all and paste this → commit the changes. No other files need to change.
